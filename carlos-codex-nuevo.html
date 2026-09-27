@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CARLOS-CODEX | Catálogo Premium & Edición</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<style>
+:root{
+  --bg-main:#0B0A12;
+  --bg-card:rgba(23,20,38,.75);
+  --border-glow:#8B5CF6;
+  --accent-neon:#A855F7;
+  --cyan-glow:#06B6D4;
+  --green-neon:#10B981;
+  --pink-neon:#EC4899;
+  --gold-neon:#F59E0B;
+  --red-neon:#EF4444;
+  --text-main:#F3F4F6;
+  --text-muted:#9CA3AF;
+}
+*{box-sizing:border-box;margin:0;padding:0;font-family:'Rajdhani',sans-serif}
+body{
+  background-color:var(--bg-main);color:var(--text-main);min-height:100vh;
+  display:flex;flex-direction:column;
+  background-image:
+    radial-gradient(circle at 10% 20%,rgba(139,92,246,.15) 0%,transparent 40%),
+    radial-gradient(circle at 90% 80%,rgba(6,182,212,.15) 0%,transparent 40%);
+  background-attachment:fixed;
+}
+header{
+  background:rgba(11,10,18,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(139,92,246,.3);padding:12px 20px;
+  position:sticky;top:0;z-index:100;display:flex;
+  justify-content:space-between;align-items:center;
+}
+.brand-title{
+  font-family:'Orbitron',sans-serif;font-size:1.4rem;font-weight:800;
+  background:linear-gradient(135deg,#FFF,var(--accent-neon),var(--cyan-glow));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  display:flex;align-items:center;gap:8px;
+}
+.nav-actions{display:flex;gap:10px}
+.btn-icon{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  color:var(--text-main);width:40px;height:40px;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+}
+.btn-icon:hover{background:rgba(139,92,246,.2);border-color:var(--accent-neon)}
+.hero{padding:20px;text-align:center}
+.hero-banner{
+  background:var(--bg-card);border:1px solid rgba(139,92,246,.3);
+  border-radius:20px;padding:20px;box-shadow:0 8px 32px rgba(0,0,0,.37);
+  backdrop-filter:blur(8px);display:flex;flex-direction:column;
+  align-items:center;gap:12px;
+}
+.profile-img-container{
+  position:relative;width:85px;height:85px;border-radius:50%;
+  border:2px solid var(--cyan-glow);box-shadow:0 0 15px rgba(6,182,212,.5);
+  overflow:hidden;cursor:pointer;
+}
+.profile-img-container img{width:100%;height:100%;object-fit:cover}
+.hero-title{
+  font-family:'Orbitron',sans-serif;font-size:1.8rem;font-weight:800;
+  letter-spacing:2px;color:#FFF;text-shadow:0 0 10px rgba(168,85,247,.5);
+}
+.search-container{margin:10px 20px;position:relative}
+.search-input{
+  width:100%;background:rgba(15,13,25,.8);
+  border:1px solid rgba(139,92,246,.4);padding:12px 15px 12px 42px;
+  border-radius:12px;color:#FFF;font-size:1rem;outline:none;
+}
+.search-icon{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--text-muted)}
+.metrics-pills{
+  display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin:10px 20px
+}
+.pill{
+  background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);
+  padding:6px 14px;border-radius:20px;font-size:.85rem;font-weight:600;
+  display:flex;align-items:center;gap:6px;
+}
+.pill-purple{border-color:var(--accent-neon);color:#D8B4FE}
+.pill-green{border-color:var(--green-neon);color:#6EE7B7}
+.pill-gold{border-color:var(--gold-neon);color:#FDE047}
+.admin-bar{
+  margin:10px 20px;display:none;justify-content:space-between;
+  align-items:center;gap:10px;
+}
+body.is-admin .admin-bar{display:flex}
+.admin-badge{
+  position:fixed;bottom:16px;right:16px;z-index:400;
+  background:linear-gradient(135deg,var(--accent-neon),var(--pink-neon));
+  color:#fff;font-size:.72rem;font-weight:700;padding:6px 12px;
+  border-radius:20px;box-shadow:0 0 12px rgba(236,72,153,.5);cursor:pointer;
+}
+.btn-add{
+  background:linear-gradient(135deg,var(--accent-neon),var(--pink-neon));
+  border:none;color:white;padding:10px 18px;border-radius:10px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;gap:8px;
+  box-shadow:0 0 12px rgba(236,72,153,.4);
+}
+.catalog-section{padding:10px 20px;flex:1}
+.catalog-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:15px
+}
+.card-item{
+  background:var(--bg-card);border:1px solid rgba(139,92,246,.25);
+  border-radius:16px;padding:16px;position:relative;display:flex;
+  flex-direction:column;justify-content:space-between;
+}
+.card-thumb{
+  width:calc(100% + 32px);margin:-16px -16px 12px;height:150px;
+  overflow:hidden;border-radius:16px 16px 0 0;
+}
+.card-thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.badge{
+  position:absolute;top:12px;right:12px;font-size:.7rem;font-weight:700;
+  padding:4px 8px;border-radius:6px;z-index:2;
+}
+.badge-free{background:rgba(16,185,129,.2);color:var(--green-neon);border:1px solid var(--green-neon)}
+.badge-premium{background:rgba(245,158,11,.2);color:var(--gold-neon);border:1px solid var(--gold-neon)}
+.card-title{
+  font-family:'Orbitron',sans-serif;font-size:1.1rem;color:#FFF;
+  margin-top:10px;margin-bottom:6px;padding-right:75px;
+}
+.card-category{font-size:.8rem;color:var(--cyan-glow)}
+.card-actions{display:flex;gap:8px;margin-top:15px}
+.btn-card{
+  flex:1;padding:8px;border-radius:8px;border:1px solid rgba(255,255,255,.1);
+  background:rgba(255,255,255,.05);color:#FFF;font-weight:600;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;gap:6px;
+}
+.btn-edit{border-color:var(--cyan-glow);color:var(--cyan-glow)}
+.btn-delete{border-color:var(--pink-neon);color:var(--pink-neon)}
+.btn-code{border-color:var(--accent-neon);color:#D8B4FE}
+.modal{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,.82);
+  backdrop-filter:blur(8px);z-index:200;align-items:center;justify-content:center;
+  padding:20px;
+}
+.modal-content{
+  background:#131122;border:1px solid var(--accent-neon);border-radius:20px;
+  width:100%;max-width:520px;padding:25px;max-height:90vh;overflow:auto;
+}
+.modal-header{
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:15px
+}
+.modal-header h3{font-family:'Orbitron';color:#FFF}
+.form-group{margin-bottom:15px}
+.form-group label{display:block;font-size:.85rem;color:var(--text-muted);margin-bottom:5px}
+.form-control{
+  width:100%;background:rgba(255,255,255,.05);
+  border:1px solid rgba(255,255,255,.1);padding:10px;border-radius:8px;
+  color:#FFF;outline:none;
+}
+textarea.form-control{min-height:180px;resize:vertical;font-family:monospace;font-size:.85rem}
+select.form-control option{background:#131122;color:#fff}
+.btn-save{
+  width:100%;justify-content:center;margin-top:5px;
+}
+.btn-pay{
+  width:100%;padding:12px;border-radius:10px;border:none;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  gap:10px;margin-bottom:10px;
+}
+.btn-close{background:linear-gradient(135deg,#7C3AED,#9333EA);color:#fff}
+.payment-box{
+  background:rgba(255,255,255,.035);padding:15px;border-radius:14px;
+  border:1px solid rgba(139,92,246,.15);margin-bottom:15px;
+}
+.payment-row{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:10px 0;border-bottom:1px solid rgba(255,255,255,.06);gap:10px;
+}
+.payment-row:last-child{border-bottom:0}
+.payment-label{color:#9CA3AF}
+.payment-value{font-weight:700}
+.payment-number{color:#34D399;font-size:1.2rem}
+.copy-btn{
+  border:0;background:#7C3AED;color:#fff;border-radius:8px;
+  padding:8px 10px;cursor:pointer;
+}
+.code-preview{
+  display:none;background:#08080d;border:1px solid rgba(139,92,246,.3);
+  border-radius:10px;padding:12px;margin-top:12px;overflow:auto;
+}
+.code-preview pre{white-space:pre-wrap;color:#D1D5DB;font-family:monospace;font-size:.8rem}
+.small-note{color:var(--text-muted);font-size:.78rem;margin-top:5px}
+.toast{
+  position:fixed;left:50%;bottom:25px;transform:translateX(-50%) translateY(100px);
+  background:#181525;border:1px solid var(--accent-neon);color:#fff;
+  padding:12px 18px;border-radius:12px;z-index:500;transition:.3s;
+  box-shadow:0 0 20px rgba(168,85,247,.3);
+}
+.toast.show{transform:translateX(-50%) translateY(0)}
+@media(max-width:500px){
+  .brand-title{font-size:1.05rem}
+  .admin-bar{align-items:flex-start}
+  .admin-bar .btn-add{padding:9px 12px}
+  .catalog-grid{grid-template-columns:1fr}
+  .modal-content{padding:18px}
+}
+
+.hero-home{margin:0 20px 20px;padding:28px 22px;border:1px solid rgba(139,92,246,.28);border-radius:22px;background:radial-gradient(circle at 85% 20%,rgba(168,85,247,.18),transparent 35%),linear-gradient(135deg,rgba(31,20,58,.85),rgba(10,10,20,.92));box-shadow:0 10px 35px rgba(0,0,0,.25)}
+.hero-tag{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:20px;background:rgba(139,92,246,.14);border:1px solid rgba(168,85,247,.35);color:#D8B4FE;font-weight:700;font-size:.78rem}
+.hero-home h2{margin-top:28px;font-family:'Orbitron',sans-serif;font-size:2.25rem;line-height:1.05;color:#fff}
+.hero-home h2 span{display:block;margin-top:8px;background:linear-gradient(90deg,#C084FC,#A855F7,#06B6D4);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-home p{margin-top:22px;color:#D1D5DB;font-size:1rem;line-height:1.7;max-width:650px}
+.hero-home .search-container{margin:24px 0 0}
+.hero-metrics{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.metric-extra{background:rgba(168,85,247,.12);border:1px solid rgba(168,85,247,.35);color:#D8B4FE;padding:7px 14px;border-radius:20px;font-weight:700;font-size:.82rem}
+.categories-section{padding:0 20px 22px}
+.categories-title{text-align:center;font-family:'Orbitron',sans-serif;color:#C084FC;font-size:1.45rem;letter-spacing:1px;margin:12px 0 18px}
+.categories-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.category-btn{min-height:58px;padding:10px 8px;border-radius:14px;border:1px solid rgba(139,92,246,.2);background:rgba(23,20,38,.65);color:#D1D5DB;cursor:pointer;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px;transition:.25s}
+.category-btn:hover,.category-btn.active{background:linear-gradient(135deg,#7C3AED,#9333EA);color:#fff;border-color:#A855F7;box-shadow:0 0 16px rgba(168,85,247,.35)}
+
+/* ===== CABECERA CARLOS-CODEX V2 ===== */
+.topbar-v2{
+  height:88px;
+  padding:12px 20px;
+  position:sticky;
+  top:0;
+  z-index:300;
+  display:flex;
+  align-items:center;
+  gap:12px;
+  background:rgba(11,10,18,.94);
+  backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(139,92,246,.28);
+}
+.menu-v2,.theme-v2{
+  width:52px;height:52px;flex:0 0 52px;
+  border:1px solid rgba(139,92,246,.35);
+  border-radius:14px;
+  background:rgba(124,58,237,.16);
+  color:#fff;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.25rem;
+  box-shadow:0 0 14px rgba(124,58,237,.14);
+}
+.brand-v2{
+  min-width:0;flex:1;
+  display:flex;align-items:center;gap:12px;
+}
+.brand-avatar-v2{
+  width:54px;height:54px;flex:0 0 54px;
+  border-radius:15px;
+  overflow:hidden;cursor:pointer;
+  border:2px solid #A855F7;
+  box-shadow:0 0 16px rgba(168,85,247,.55);
+}
+.brand-avatar-v2 img{width:100%;height:100%;object-fit:cover}
+.brand-info-v2{min-width:0}
+.brand-name-v2{
+  font-family:'Orbitron',sans-serif;
+  font-weight:800;font-size:1.2rem;
+  color:#fff;white-space:nowrap;
+}
+.brand-role-v2{
+  display:inline-flex;align-items:center;gap:6px;
+  margin-top:4px;padding:3px 10px;border-radius:14px;
+  background:rgba(139,92,246,.18);
+  color:#C4B5FD;border:1px solid rgba(168,85,247,.25);
+  font-size:.72rem;font-weight:700;
+}
+.whatsapp-v2{
+  width:54px;height:54px;flex:0 0 54px;
+  border:0;border-radius:14px;
+  background:#059669;color:#fff;
+  display:flex;align-items:center;justify-content:center;
+  font-size:1.45rem;text-decoration:none;
+  box-shadow:0 0 18px rgba(16,185,129,.25);
+}
+.drawer-backdrop-v2{
+  display:none;position:fixed;inset:0;z-index:400;
+  background:rgba(0,0,0,.62);backdrop-filter:blur(3px);
+}
+.drawer-backdrop-v2.show{display:block}
+.drawer-v2{
+  position:fixed;top:0;left:0;bottom:0;z-index:401;
+  width:min(88vw,445px);
+  background:linear-gradient(180deg,#100b1d 0%,#090713 100%);
+  border-right:1px solid rgba(139,92,246,.35);
+  box-shadow:20px 0 45px rgba(0,0,0,.45);
+  transform:translateX(-105%);
+  transition:transform .28s ease;
+  overflow-y:auto;
+}
+.drawer-v2.open{transform:translateX(0)}
+.drawer-head-v2{
+  position:relative;padding:28px 22px 24px;text-align:center;
+  border-bottom:1px solid rgba(139,92,246,.18);overflow:visible;
+}
+.drawer-close-v2{
+  position:absolute;right:18px;top:18px;
+  background:none;border:0;color:#E5E7EB;
+  font-size:1.8rem;cursor:pointer;
+}
+.drawer-avatar-v2{
+  width:100px;height:100px;margin:0 auto 14px;
+  border-radius:50%;overflow:hidden;
+  border:2px solid #A855F7;
+  box-shadow:0 0 22px rgba(168,85,247,.55),0 0 32px rgba(6,182,212,.16);
+}
+.drawer-avatar-v2 img{width:100%;height:100%;object-fit:cover}
+
+/* === FOTO DE PERFIL V4: LLAMA NEÓN + MENÚ DE FOTO === */
+.drawer-avatar-wrap-v3{
+  position:relative;width:126px;height:126px;margin:0 auto 16px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:visible;
+}
+.drawer-avatar-wrap-v3::before{
+  content:"";position:absolute;inset:-5px;border-radius:50%;
+  background:conic-gradient(from 0deg,#7C3AED,#C084FC,#EC4899,#06B6D4,#7C3AED);
+  filter:blur(8px);opacity:.78;
+  animation:codexFlameAura 2.4s linear infinite;
+}
+.drawer-avatar-wrap-v3::after{
+  content:"";position:absolute;inset:-2px;border-radius:50%;
+  background:conic-gradient(from 0deg,#06B6D4,#8B5CF6,#F0ABFC,#7C3AED,#06B6D4);
+  -webkit-mask:radial-gradient(circle,transparent 58%,#000 60%);
+  mask:radial-gradient(circle,transparent 58%,#000 60%);
+  animation:codexFlameRing 1.5s linear infinite;
+  z-index:1;
+}
+.drawer-avatar-v3{
+  position:relative;z-index:3;width:112px;height:112px;
+  border-radius:50%;overflow:hidden;cursor:pointer;
+  border:2px solid #C084FC;background:#120a22;
+  box-shadow:0 0 20px rgba(168,85,247,.85),0 0 42px rgba(139,92,246,.42);
+  display:block;
+}
+.drawer-avatar-photo-side{
+  width:100%;height:100%;overflow:hidden;
+}
+.drawer-avatar-photo-side img{width:100%;height:100%;object-fit:cover;display:block}
+.drawer-avatar-change-side{display:none}
+.drawer-avatar-change-side i{display:none}
+
+.drawer-avatar-camera-v3{
+  position:absolute;right:1px;bottom:3px;z-index:8;
+  width:38px;height:38px;border-radius:50%;border:2px solid #100b1d;
+  background:linear-gradient(135deg,#C084FC,#7C3AED);
+  color:#fff;display:none;align-items:center;justify-content:center;
+  cursor:pointer;box-shadow:0 0 16px rgba(168,85,247,.9);
+}
+body.is-admin .drawer-avatar-camera-v3{display:flex}
+.drawer-avatar-camera-v3 i{font-size:.95rem}
+.photo-menu-v3{
+  position:absolute;left:50%;top:142px;z-index:100000;
+  width:min(300px,calc(100vw - 36px));
+  transform:translate(-50%,-10px) scale(.96);
+  opacity:0;visibility:hidden;pointer-events:none;
+  padding:9px;border:1px solid #9B5CFF;border-radius:18px;
+  background:linear-gradient(180deg,#1a0d31 0%,#090612 100%);
+  box-shadow:0 0 25px rgba(139,92,246,.45),0 18px 50px rgba(0,0,0,.65);
+  transition:opacity .18s ease,transform .18s ease,visibility .18s ease;
+}
+.photo-menu-v3.open{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transform:translate(-50%,0) scale(1);
+}
+.photo-menu-v3::before{
+  content:"";position:absolute;top:-7px;left:50%;
+  width:13px;height:13px;transform:translateX(-50%) rotate(45deg);
+  background:#1a0d31;border-left:1px solid #9B5CFF;border-top:1px solid #9B5CFF;
+}
+.photo-menu-btn-v3{
+  width:100%;border:0;background:transparent;color:#F3F4F6;
+  padding:13px 14px;border-radius:12px;display:flex;align-items:center;
+  gap:14px;text-align:left;cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-size:1.02rem;font-weight:700;
+}
+.photo-menu-btn-v3:hover,.photo-menu-btn-v3:active{
+  background:rgba(139,92,246,.17);color:#D8B4FE;
+}
+.photo-menu-btn-v3 i{width:28px;text-align:center;font-size:1.15rem;color:#C084FC}
+.photo-menu-btn-v3.delete-v3 i{color:#EC4899}
+.photo-menu-btn-v3.delete-v3:hover{color:#F9A8D4;background:rgba(236,72,153,.10)}
+@keyframes codexFlameAura{
+  0%{transform:rotate(0deg) scale(.98)}
+  50%{transform:rotate(180deg) scale(1.04)}
+  100%{transform:rotate(360deg) scale(.98)}
+}
+@keyframes codexFlameRing{
+  from{transform:rotate(0deg)}
+  to{transform:rotate(360deg)}
+}
+
+.photo-direct-v4{display:none}
+.drawer-title-v2{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.35rem;font-weight:800;
+  background:linear-gradient(90deg,#C084FC,#A855F7,#06B6D4);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+}
+.drawer-sub-v2{margin-top:7px;color:#9CA3AF;letter-spacing:3px;font-size:.72rem}
+.drawer-body-v2{padding:18px 14px 24px}
+.drawer-link-v2,.drawer-section-v2{
+  width:100%;border:0;background:none;color:#D1D5DB;
+  text-decoration:none;cursor:pointer;
+  display:flex;align-items:center;gap:16px;
+  padding:14px 18px;border-radius:14px;
+  font-size:1rem;font-weight:700;text-align:left;
+}
+.drawer-link-v2:hover,.drawer-section-v2:hover{
+  background:rgba(139,92,246,.12);color:#fff;
+}
+.drawer-section-v2 i:first-child,.drawer-link-v2 i:first-child{width:24px;text-align:center;color:#C084FC}
+.drawer-chevron-v2{margin-left:auto}
+.drawer-submenu-v2{display:none;padding:2px 0 8px 18px}
+.drawer-submenu-v2.open{display:block}
+.drawer-subitem-v2{
+  width:100%;background:none;border:0;color:#AFA8C7;
+  padding:11px 16px 11px 38px;text-align:left;display:block;
+  cursor:pointer;border-radius:10px;font-size:.94rem;text-decoration:none;
+}
+.drawer-subitem-v2:hover{background:rgba(139,92,246,.10);color:#fff}
+.drawer-divider-v2{height:1px;background:rgba(139,92,246,.16);margin:12px 8px}
+.drawer-bottom-v2{
+  margin-top:24px;padding:14px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  color:#D1D5DB;font-weight:700;
+}
+.switch-v2{
+  width:58px;height:32px;border-radius:20px;
+  background:#4C1D95;border:1px solid #7C3AED;
+  padding:3px;cursor:pointer;display:flex;justify-content:flex-end;
+}
+.switch-dot-v2{
+  width:24px;height:24px;border-radius:50%;background:#C084FC;
+  box-shadow:0 0 10px rgba(192,132,252,.6);
+}
+body.light-mode-v2{
+  --bg-main:#F5F3FF;--bg-card:rgba(255,255,255,.85);
+  --text-main:#171226;--text-muted:#5B556B;
+  background-image:radial-gradient(circle at 10% 20%,rgba(139,92,246,.12) 0%,transparent 40%),radial-gradient(circle at 90% 80%,rgba(6,182,212,.10) 0%,transparent 40%);
+}
+body.light-mode-v2 .topbar-v2,
+body.light-mode-v2 .drawer-v2{background:#fff}
+body.light-mode-v2 .hero-home,
+body.light-mode-v2 .card-item,
+body.light-mode-v2 .categories-section .category-btn{color:#171226}
+@media(max-width:520px){
+  .topbar-v2{height:76px;padding:10px 12px;gap:8px}
+  .menu-v2,.theme-v2,.whatsapp-v2{width:48px;height:48px;flex-basis:48px}
+  .brand-avatar-v2{width:48px;height:48px;flex-basis:48px}
+  .brand-name-v2{font-size:1rem}
+  .brand-role-v2{font-size:.65rem;padding:2px 8px}
+}
+
+</style>
+</head>
+
+<body>
+
+
+<header class="topbar-v2">
+  <button class="menu-v2" onclick="toggleDrawer()" aria-label="Abrir menú">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <div class="brand-v2">
+    <div class="brand-avatar-v2" onclick="toggleDrawer();setTimeout(function(){if(window.isAdmin) document.getElementById('photoMenuV3')?.classList.add('open')},180)" title="Foto de perfil">
+      <img id="profileImageTop"
+           src="https://ui-avatars.com/api/?name=Carlos+Codex&background=160D28&color=C084FC"
+           alt="Foto de perfil">
+    </div>
+    <div class="brand-info-v2">
+      <div class="brand-name-v2">CARLOS-CODEX</div>
+      <div class="brand-role-v2"><i class="fa-solid fa-graduation-cap"></i> DESARROLLADOR</div>
+    </div>
+  </div>
+
+  <button class="theme-v2" onclick="toggleTheme()" title="Cambiar tema">
+    <i id="themeIconV2" class="fa-solid fa-moon"></i>
+  </button>
+
+  <a class="whatsapp-v2" href="https://wa.me/573016486100" target="_blank" rel="noopener" title="WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</header>
+
+<div class="drawer-backdrop-v2" id="drawerBackdrop" onclick="closeDrawer()"></div>
+
+<aside class="drawer-v2" id="drawerV2">
+  <button class="drawer-close-v2" onclick="closeDrawer()" aria-label="Cerrar menú">
+    <i class="fa-solid fa-xmark"></i>
+  </button>
+
+  <div class="drawer-head-v2">
+    <div class="drawer-avatar-wrap-v3">
+      <div class="drawer-avatar-v3" onclick="togglePhotoMenu()" title="Opciones de foto">
+        <div class="drawer-avatar-photo-side">
+          <img id="profileImageDrawer"
+               src="https://ui-avatars.com/api/?name=Carlos+Codex&background=160D28&color=C084FC"
+               alt="Foto de perfil">
+        </div>
+</div>
+      <button type="button" class="drawer-avatar-camera-v3" onclick="togglePhotoMenu()" aria-label="Opciones de foto" title="Cambiar foto">
+        <i class="fa-solid fa-camera"></i>
+      </button>
+
+      <button class="photo-direct-v4" onclick="togglePhotoMenu()" type="button">
+        <i class="fa-solid fa-image"></i> Cambiar foto
+      </button>
+      <div class="photo-menu-v3" id="photoMenuV3">
+        <button class="photo-menu-btn-v3" onclick="changeProfilePhoto()">
+          <i class="fa-solid fa-image"></i><span>Cambiar foto</span>
+        </button>
+        <button class="photo-menu-btn-v3" onclick="takeProfilePhoto()">
+          <i class="fa-solid fa-camera"></i><span>Tomar foto</span>
+        </button>
+        <button class="photo-menu-btn-v3 delete-v3" onclick="removeProfilePhoto()">
+          <i class="fa-solid fa-trash"></i><span>Eliminar foto</span>
+        </button>
+      </div>
+    </div>
+    <div class="drawer-title-v2">CARLOS-CODEX</div>
+    <div class="drawer-sub-v2">CRAFT · CODE · CREATE</div>
+  </div>
+
+  <div class="drawer-body-v2">
+    <button class="drawer-section-v2" onclick="goHome()">
+      <i class="fa-solid fa-house"></i><span>Inicio</span>
+    </button>
+
+    <button class="drawer-section-v2" onclick="toggleSubmenu('languageMenuV2','languageChevronV2')">
+      <i class="fa-solid fa-code"></i><span>Lenguajes</span>
+      <i id="languageChevronV2" class="fa-solid fa-chevron-down drawer-chevron-v2"></i>
+    </button>
+    <div class="drawer-submenu-v2" id="languageMenuV2">
+      <button class="drawer-subitem-v2" onclick="selectCategory('HTML / CSS',this);closeDrawer()">🟧 HTML / CSS</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Python',this);closeDrawer()">🐍 Python</button>
+      <button class="drawer-subitem-v2" onclick="closeDrawer();focusHomeSearch('JavaScript')">⚡ JavaScript</button>
+    </div>
+
+    <button class="drawer-section-v2" onclick="toggleSubmenu('categoryMenuV2','categoryChevronV2')">
+      <i class="fa-solid fa-folder-open"></i><span>Categorías</span>
+      <i id="categoryChevronV2" class="fa-solid fa-chevron-down drawer-chevron-v2"></i>
+    </button>
+    <div class="drawer-submenu-v2" id="categoryMenuV2">
+      <button class="drawer-subitem-v2" onclick="selectCategory('Corazones',this);closeDrawer()">♥️ Corazones</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Estrellas',this);closeDrawer()">⭐ Estrellas</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Galaxias',this);closeDrawer()">🌌 Galaxias</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Flores',this);closeDrawer()">🌱 Flores</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Cumpleaños',this);closeDrawer()">🎂 Cumpleaños</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Animaciones',this);closeDrawer()">🪄 Animaciones</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Dibujos',this);closeDrawer()">🎨 Dibujos</button>
+      <button class="drawer-subitem-v2" onclick="selectCategory('Otros',this);closeDrawer()">🔺 Otros</button>
+    </div>
+
+    <div class="drawer-divider-v2"></div>
+
+    <button class="drawer-section-v2" onclick="toggleSubmenu('socialMenuV2','socialChevronV2')">
+      <i class="fa-solid fa-globe"></i><span>Redes sociales</span>
+      <i id="socialChevronV2" class="fa-solid fa-chevron-down drawer-chevron-v2"></i>
+    </button>
+    <div class="drawer-submenu-v2" id="socialMenuV2">
+      <a class="drawer-subitem-v2" href="https://wa.me/573016486100" target="_blank" rel="noopener" onclick="closeDrawer()"><i class="fa-brands fa-whatsapp" style="color:#22C55E;width:20px"></i> WhatsApp</a>
+      <a class="drawer-subitem-v2" href="#" target="_blank" rel="noopener" onclick="closeDrawer()"><i class="fa-brands fa-x-twitter" style="width:20px"></i> X</a>
+      <a class="drawer-subitem-v2" href="#" target="_blank" rel="noopener" onclick="closeDrawer()"><i class="fa-brands fa-instagram" style="color:#EC4899;width:20px"></i> Instagram</a>
+      <a class="drawer-subitem-v2" href="#" target="_blank" rel="noopener" onclick="closeDrawer()"><i class="fa-brands fa-tiktok" style="width:20px"></i> TikTok</a>
+      <a class="drawer-subitem-v2" href="#" target="_blank" rel="noopener" onclick="closeDrawer()"><i class="fa-brands fa-youtube" style="color:#EF4444;width:20px"></i> YouTube</a>
+    </div>
+
+    <div class="drawer-divider-v2"></div>
+
+    <a class="drawer-link-v2" href="https://wa.me/573016486100" target="_blank" rel="noopener" onclick="closeDrawer()">
+      <i class="fa-brands fa-whatsapp" style="color:#22C55E"></i><span>Canal WhatsApp</span>
+    </a>
+
+    <button class="drawer-link-v2" onclick="closeDrawer();openDonateModal()">
+      <i class="fa-solid fa-hand-holding-heart" style="color:#EC4899"></i><span>Donar / Daviplata</span>
+    </button>
+
+    <div class="drawer-bottom-v2">
+      <span><i class="fa-solid fa-moon" style="color:#C084FC;margin-right:10px"></i>Modo Oscuro</span>
+      <button class="switch-v2" onclick="toggleTheme()" aria-label="Cambiar tema">
+        <span class="switch-dot-v2"></span>
+      </button>
+    </div>
+  </div>
+</aside>
+
+
+
+<input type="file" id="fileInput" accept="image/*" style="display:none" onchange="loadProfileImage(event)">
+<input type="file" id="cameraInputV3" accept="image/*" capture="environment" style="display:none" onchange="loadProfileImage(event)">
+<section class="hero-home">
+<div class="hero-tag">● CARLOS CODEX · CATÁLOGO PREMIUM</div>
+<h2>CRAFT.<span>CODE. CREATE.</span></h2>
+<p>Explora códigos HTML, CSS, JavaScript y Python modernos con animaciones e interacciones listas para copiar y personalizar.</p>
+<div class="search-container">
+<i class="fa-solid fa-magnifying-glass search-icon"></i>
+<input type="text" id="homeSearchInput" class="search-input" placeholder="Buscar código por nombre, lenguaje o categoría..." oninput="syncHomeSearch()">
+</div>
+<div class="hero-metrics">
+<div class="metric-extra">⚡ <span id="heroTotal">0</span> CÓDIGOS</div>
+<div class="metric-extra">🎁 <span id="heroFree">0</span> GRATIS</div>
+<div class="metric-extra">💎 <span id="heroPremium">0</span> PREMIUM</div>
+<div class="metric-extra">🐍 <span id="heroPython">0</span> PYTHON</div>
+</div>
+</section>
+
+<section class="categories-section">
+<h2 class="categories-title">CATEGORÍAS</h2>
+<div class="categories-grid">
+<button class="category-btn active" onclick="selectCategory('TODOS',this)"><i class="fa-solid fa-table-cells-large"></i> TODOS</button>
+<button class="category-btn" onclick="selectCategory('FREE',this)"><i class="fa-solid fa-gift"></i> GRATIS</button>
+<button class="category-btn" onclick="selectCategory('PREMIUM',this)"><i class="fa-solid fa-gem"></i> PREMIUM</button>
+<button class="category-btn" onclick="selectCategory('Python',this)"><i class="fa-brands fa-python"></i> PYTHON</button>
+<button class="category-btn" onclick="selectCategory('Flores',this)"><i class="fa-solid fa-seedling"></i> FLORES</button>
+<button class="category-btn" onclick="selectCategory('Animaciones',this)"><i class="fa-solid fa-wand-magic-sparkles"></i> ANIMACIONES</button>
+<button class="category-btn" onclick="selectCategory('Cumpleaños',this)"><i class="fa-solid fa-cake-candles"></i> CUMPLEAÑOS</button>
+<button class="category-btn" onclick="selectCategory('Dibujos',this)"><i class="fa-solid fa-palette"></i> DIBUJOS</button>
+<button class="category-btn" onclick="selectCategory('Galaxias',this)"><i class="fa-solid fa-meteor"></i> GALAXIAS</button>
+<button class="category-btn" onclick="selectCategory('Corazones',this)"><i class="fa-solid fa-heart"></i> CORAZONES</button>
+<button class="category-btn" onclick="selectCategory('Estrellas',this)"><i class="fa-solid fa-star"></i> ESTRELLAS</button>
+<button class="category-btn" onclick="selectCategory('Otros',this)"><i class="fa-solid fa-shapes"></i> OTROS</button>
+</div>
+</section>
+
+
+<div class="search-container">
+  <i class="fa-solid fa-magnifying-glass search-icon"></i>
+  <input type="text" id="searchInput" class="search-input"
+         placeholder="Buscar activo por nombre..." oninput="filterItems()">
+</div>
+
+<div class="metrics-pills">
+  <div class="pill pill-purple"><i class="fa-solid fa-bolt"></i> <span id="countTotal">0</span> CÓDIGOS</div>
+  <div class="pill pill-green"><i class="fa-solid fa-gift"></i> <span id="countFree">0</span> GRATIS</div>
+  <div class="pill pill-gold"><i class="fa-solid fa-gem"></i> <span id="countPremium">0</span> PREMIUM</div>
+</div>
+
+<div class="admin-bar">
+  <span style="font-family:'Orbitron';font-size:.9rem;color:var(--cyan-glow)">Tus Activos</span>
+  <button class="btn-add" onclick="openAddModal()">
+    <i class="fa-solid fa-plus"></i> Agregar Activo
+  </button>
+</div>
+
+<main class="catalog-section">
+  <div class="catalog-grid" id="catalogGrid"></div>
+</main>
+
+<!-- MODAL DONAR -->
+<div class="modal" id="donateModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3><i class="fa-solid fa-wallet" style="color:var(--pink-neon)"></i> Datos de Pago / Daviplata</h3>
+      <button class="btn-icon" onclick="closeDonateModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <p style="text-align:center;color:var(--text-muted);font-size:.95rem;margin-bottom:18px">
+      Puedes realizar transferencias directas a través de Daviplata para cualquier solicitud o donación.
+    </p>
+
+    <div class="payment-box">
+      <div class="payment-row">
+        <span class="payment-label">Titular / Proyecto:</span>
+        <strong class="payment-value">CARLOS-CODEX</strong>
+      </div>
+      <div class="payment-row">
+        <span class="payment-label">Daviplata:</span>
+        <div style="display:flex;align-items:center;gap:8px">
+          <strong class="payment-number">3016486100</strong>
+          <button class="copy-btn" onclick="copyAccountNumber()" title="Copiar">
+            <i class="fa-solid fa-copy"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <button class="btn-pay btn-close" onclick="closeDonateModal()">Cerrar</button>
+  </div>
+</div>
+
+<!-- MODAL AGREGAR / EDITAR -->
+<div class="modal" id="itemModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="modalTitle">Agregar Activo</h3>
+      <button class="btn-icon" onclick="closeItemModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+
+    <input type="hidden" id="editItemId">
+
+    <div class="form-group">
+      <label>Nombre del código</label>
+      <input type="text" id="itemName" class="form-control" placeholder="Ej: Galaxia con Flores">
+    </div>
+
+    <div class="form-group">
+      <label>Categoría</label>
+      <input type="text" id="itemCategory" class="form-control" placeholder="Ej: Animaciones, Python">
+    </div>
+
+    <div class="form-group">
+      <label>Imagen o miniatura (opcional)</label>
+      <input type="file" id="itemImageFile" accept="image/*" class="form-control" onchange="loadItemImage(event)">
+      <input type="hidden" id="itemImageData">
+      <div id="itemImagePreviewWrap" style="margin-top:8px;display:none">
+        <img id="itemImagePreview" style="width:100%;height:140px;object-fit:cover;border-radius:10px;border:1px solid rgba(139,92,246,.3)">
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Tipo</label>
+      <select id="itemType" class="form-control">
+        <option value="FREE">GRATIS</option>
+        <option value="PREMIUM">PREMIUM</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>Código</label>
+      <textarea id="itemCode" class="form-control" placeholder="Pega aquí el código..."></textarea>
+      <div class="small-note">Puedes editar el código directamente desde esta ventana.</div>
+    </div>
+
+    <button class="btn-add btn-save" onclick="saveItem()">
+      <i class="fa-solid fa-floppy-disk"></i> Guardar Cambios
+    </button>
+  </div>
+</div>
+
+<!-- MODAL VER CÓDIGO -->
+<div class="modal" id="codeModal">
+  <div class="modal-content">
+    <div class="modal-header">
+      <h3 id="codeModalTitle">Código</h3>
+      <button class="btn-icon" onclick="closeCodeModal()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    <div class="code-preview" style="display:block">
+      <pre id="codeText"></pre>
+    </div>
+    <button class="btn-pay btn-close" onclick="copyCurrentCode()">
+      <i class="fa-solid fa-copy"></i> Copiar código
+    </button>
+    <button class="btn-pay" style="background:rgba(255,255,255,.07);color:#fff;border:1px solid rgba(255,255,255,.12)" onclick="closeCodeModal()">
+      Cerrar
+    </button>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="admin-badge" id="adminBadge" style="display:none" onclick="exitAdminMode()">
+  <i class="fa-solid fa-shield-halved"></i> Modo admin (toca para salir)
+</div>
+
+<script>
+const STORAGE_KEY = "carlos_codex_items";
+
+let catalogData = JSON.parse(localStorage.getItem(STORAGE_KEY)) || [
+  {
+    id:1,
+    name:"Galaxia Con Flores Azules",
+    category:"Galaxias",
+    type:"FREE",
+    code:"<!-- Pega aquí el código de Galaxia Con Flores Azules -->"
+  },
+  {
+    id:2,
+    name:"Animación Neón Cyberpunk",
+    category:"Animaciones",
+    type:"PREMIUM",
+    code:"// Pega aquí el código de Animación Neón Cyberpunk"
+  },
+  {
+    id:3,
+    name:"Script Python Bot WhatsApp",
+    category:"Python",
+    type:"PREMIUM",
+    code:"# Pega aquí el código Python"
+  }
+];
+
+let currentCodeId = null;
+let selectedCategory = "TODOS";
+
+const ADMIN_KEY = "codex2026";
+
+function initAdminMode(){
+  const params = new URLSearchParams(window.location.search);
+  const adminParam = params.get("admin");
+
+  if(adminParam === ADMIN_KEY){
+    localStorage.setItem("cc_is_admin","yes");
+    history.replaceState({}, "", window.location.pathname);
+  } else if(adminParam === "salir"){
+    localStorage.removeItem("cc_is_admin");
+    history.replaceState({}, "", window.location.pathname);
+  }
+
+  window.isAdmin = localStorage.getItem("cc_is_admin") === "yes";
+  document.body.classList.toggle("is-admin", window.isAdmin);
+
+  const badge = document.getElementById("adminBadge");
+  if(badge) badge.style.display = window.isAdmin ? "block" : "none";
+}
+
+function exitAdminMode(){
+  localStorage.removeItem("cc_is_admin");
+  window.isAdmin = false;
+  document.body.classList.remove("is-admin");
+  const badge = document.getElementById("adminBadge");
+  if(badge) badge.style.display = "none";
+  renderCatalog();
+  showToast("Modo admin desactivado.");
+}
+
+initAdminMode();
+
+function escapeHTML(value){
+  return String(value ?? "")
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+}
+
+
+function toggleDrawer(){
+  document.getElementById("drawerV2").classList.add("open");
+  document.getElementById("drawerBackdrop").classList.add("show");
+}
+function closeDrawer(){
+  document.getElementById("drawerV2").classList.remove("open");
+  document.getElementById("drawerBackdrop").classList.remove("show");
+}
+function toggleSubmenu(menuId,chevronId){
+  const menu=document.getElementById(menuId);
+  const chevron=document.getElementById(chevronId);
+  menu.classList.toggle("open");
+  chevron.classList.toggle("fa-chevron-down");
+  chevron.classList.toggle("fa-chevron-up");
+}
+function goHome(){
+  closeDrawer();
+  window.scrollTo({top:0,behavior:"smooth"});
+  selectedCategory="TODOS";
+  document.querySelectorAll(".category-btn").forEach(x=>x.classList.remove("active"));
+  const first=document.querySelector(".category-btn");
+  if(first)first.classList.add("active");
+  applyFilters(document.getElementById("searchInput").value.toLowerCase().trim());
+}
+function focusHomeSearch(text){
+  const input=document.getElementById("homeSearchInput");
+  const main=document.getElementById("searchInput");
+  if(input)input.value=text;
+  if(main)main.value=text;
+  applyFilters(text.toLowerCase());
+}
+function toggleTheme(){
+  document.body.classList.toggle("light-mode-v2");
+  const isLight=document.body.classList.contains("light-mode-v2");
+  const icon=document.getElementById("themeIconV2");
+  if(icon)icon.className=isLight?"fa-solid fa-sun":"fa-solid fa-moon";
+  localStorage.setItem("carlos_codex_theme",isLight?"light":"dark");
+}
+function loadSavedTheme(){
+  if(localStorage.getItem("carlos_codex_theme")==="light"){
+    document.body.classList.add("light-mode-v2");
+    const icon=document.getElementById("themeIconV2");
+    if(icon)icon.className="fa-solid fa-sun";
+  }
+}
+
+function togglePhotoMenu(){
+  if(!window.isAdmin) return;
+  const menu=document.getElementById("photoMenuV3");
+  if(menu) menu.classList.toggle("open");
+}
+function closePhotoMenu(){
+  const menu=document.getElementById("photoMenuV3");
+  if(menu) menu.classList.remove("open");
+}
+function changeProfilePhoto(){
+  closePhotoMenu();
+  document.getElementById("fileInput").click();
+}
+function takeProfilePhoto(){
+  closePhotoMenu();
+  document.getElementById("cameraInputV3").click();
+}
+async function removeProfilePhoto(){
+  closePhotoMenu();
+  const defaultSrc="https://ui-avatars.com/api/?name=Carlos+Codex&background=160D28&color=C084FC";
+  setProfileImageOnScreen(defaultSrc);
+
+  try{
+    const db=await openPhotoDB();
+    await new Promise((resolve,reject)=>{
+      const tx=db.transaction(CODEX_PHOTO_STORE,"readwrite");
+      tx.objectStore(CODEX_PHOTO_STORE).delete(CODEX_PHOTO_KEY);
+      tx.oncomplete=resolve;
+      tx.onerror=()=>reject(tx.error);
+    });
+    db.close();
+  }catch(e){}
+
+  try{ localStorage.removeItem("carlos_codex_profile_image"); }catch(e){}
+  if(typeof showToast==="function") showToast("Foto eliminada");
+}
+
+/* === GUARDADO DE FOTO V5: IndexedDB + respaldo local === */
+const CODEX_PHOTO_DB = "carlos_codex_photo_db";
+const CODEX_PHOTO_STORE = "profile";
+const CODEX_PHOTO_KEY = "main";
+
+function setProfileImageOnScreen(src){
+  const top=document.getElementById("profileImageTop");
+  const drawer=document.getElementById("profileImageDrawer");
+  if(top) top.src=src;
+  if(drawer) drawer.src=src;
+}
+
+function openPhotoDB(){
+  return new Promise((resolve,reject)=>{
+    if(!("indexedDB" in window)){ reject(new Error("IndexedDB no disponible")); return; }
+    const req=indexedDB.open(CODEX_PHOTO_DB,1);
+    req.onupgradeneeded=()=>{
+      if(!req.result.objectStoreNames.contains(CODEX_PHOTO_STORE)){
+        req.result.createObjectStore(CODEX_PHOTO_STORE);
+      }
+    };
+    req.onsuccess=()=>resolve(req.result);
+    req.onerror=()=>reject(req.error || new Error("No se pudo abrir la base"));
+  });
+}
+
+async function saveProfileImagePersistently(src){
+  let saved=false;
+  try{
+    const db=await openPhotoDB();
+    await new Promise((resolve,reject)=>{
+      const tx=db.transaction(CODEX_PHOTO_STORE,"readwrite");
+      tx.objectStore(CODEX_PHOTO_STORE).put(src,CODEX_PHOTO_KEY);
+      tx.oncomplete=resolve;
+      tx.onerror=()=>reject(tx.error);
+      tx.onabort=()=>reject(tx.error || new Error("Transacción cancelada"));
+    });
+    db.close();
+    saved=true;
+  }catch(e){}
+
+  try{
+    localStorage.setItem("carlos_codex_profile_image",src);
+    saved=true;
+  }catch(e){}
+
+  return saved;
+}
+
+async function getSavedProfileImagePersistently(){
+  try{
+    const db=await openPhotoDB();
+    const src=await new Promise((resolve,reject)=>{
+      const tx=db.transaction(CODEX_PHOTO_STORE,"readonly");
+      const req=tx.objectStore(CODEX_PHOTO_STORE).get(CODEX_PHOTO_KEY);
+      req.onsuccess=()=>resolve(req.result || null);
+      req.onerror=()=>reject(req.error);
+    });
+    db.close();
+    if(src) return src;
+  }catch(e){}
+
+  try{
+    return localStorage.getItem("carlos_codex_profile_image");
+  }catch(e){
+    return null;
+  }
+}
+
+function loadProfileImage(event){
+  const file=event.target.files && event.target.files[0];
+  if(!file)return;
+
+  const reader=new FileReader();
+  reader.onload=function(e){
+    const img=new Image();
+    img.onload=async function(){
+      const max=560;
+      const scale=Math.min(1,max/Math.max(img.width,img.height));
+      const canvas=document.createElement("canvas");
+      canvas.width=Math.max(1,Math.round(img.width*scale));
+      canvas.height=Math.max(1,Math.round(img.height*scale));
+      const ctx=canvas.getContext("2d");
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+      const src=canvas.toDataURL("image/jpeg",.76);
+      setProfileImageOnScreen(src);
+
+      const saved=await saveProfileImagePersistently(src);
+      if(saved){
+        if(typeof showToast==="function") showToast("✓ Foto guardada");
+        else alert("✓ Foto guardada correctamente");
+      }else{
+        alert("La foto se ve, pero este navegador no permite guardarla permanentemente desde un archivo descargado. Para conservarla al cerrar, publica el proyecto en Internet.");
+      }
+      event.target.value="";
+    };
+    img.src=e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function loadSavedProfileImage(){
+  const src=await getSavedProfileImagePersistently();
+  if(src) setProfileImageOnScreen(src);
+}
+
+function renderCatalog(){
+  const grid = document.getElementById("catalogGrid");
+  grid.innerHTML = "";
+
+  let freeCount = 0;
+  let premiumCount = 0;
+
+  catalogData.forEach(item => {
+    if(item.type === "FREE") freeCount++;
+    if(item.type === "PREMIUM") premiumCount++;
+
+    const card = document.createElement("div");
+    card.className = "card-item";
+
+    card.innerHTML = `
+      <span class="badge ${item.type === "FREE" ? "badge-free" : "badge-premium"}">
+        ${escapeHTML(item.type)}
+      </span>
+
+      ${item.image ? `<div class="card-thumb"><img src="${item.image}" alt="${escapeHTML(item.name)}"></div>` : ""}
+
+      <div>
+        <div class="card-category">
+          <i class="fa-solid fa-folder"></i> ${escapeHTML(item.category)}
+        </div>
+
+        <h3 class="card-title">${escapeHTML(item.name)}</h3>
+      </div>
+
+      <div class="card-actions">
+        <button class="btn-card btn-code" onclick="viewCode(${item.id})">
+          ${item.type === "FREE" ? `<i class="fa-solid fa-code"></i> Ver código` : `<i class="fa-brands fa-whatsapp"></i> Comprar`}
+        </button>
+
+        ${window.isAdmin ? `
+        <button class="btn-card btn-edit" onclick="openEditModal(${item.id})">
+          <i class="fa-solid fa-pen"></i> Editar
+        </button>
+
+        <button class="btn-card btn-delete" onclick="deleteItem(${item.id})" title="Eliminar">
+          <i class="fa-solid fa-trash"></i>
+        </button>
+        ` : ""}
+      </div>
+
+      ${(item.type === "PREMIUM" && !window.isAdmin) ? `<div class="small-note" style="text-align:center;margin-top:6px">🔒 Se coordina la entrega por WhatsApp</div>` : ""}
+    `;
+
+    grid.appendChild(card);
+  });
+
+  document.getElementById("countTotal").innerText = catalogData.length;
+  document.getElementById("countFree").innerText = freeCount;
+  document.getElementById("countPremium").innerText = premiumCount;
+const ht=document.getElementById("heroTotal"),hf=document.getElementById("heroFree"),hp=document.getElementById("heroPremium"),hy=document.getElementById("heroPython");
+if(ht)ht.innerText=catalogData.length;
+if(hf)hf.innerText=freeCount;
+if(hp)hp.innerText=premiumCount;
+if(hy)hy.innerText=catalogData.filter(i=>String(i.category||"").toLowerCase()==="python").length;
+
+
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(catalogData));
+}
+
+function openDonateModal(){
+  document.getElementById("donateModal").style.display = "flex";
+}
+
+function closeDonateModal(){
+  document.getElementById("donateModal").style.display = "none";
+}
+
+function openAddModal(){
+  document.getElementById("modalTitle").innerText = "Agregar Activo";
+  document.getElementById("editItemId").value = "";
+  document.getElementById("itemName").value = "";
+  document.getElementById("itemCategory").value = "";
+  document.getElementById("itemType").value = "FREE";
+  document.getElementById("itemCode").value = "";
+  document.getElementById("itemImageData").value = "";
+  document.getElementById("itemImagePreviewWrap").style.display = "none";
+  document.getElementById("itemModal").style.display = "flex";
+}
+
+function openEditModal(id){
+  const item = catalogData.find(i => i.id === id);
+  if(!item) return;
+
+  document.getElementById("modalTitle").innerText = "Editar Activo";
+  document.getElementById("editItemId").value = item.id;
+  document.getElementById("itemName").value = item.name || "";
+  document.getElementById("itemCategory").value = item.category || "";
+  document.getElementById("itemType").value = item.type || "FREE";
+  document.getElementById("itemCode").value = item.code || "";
+  document.getElementById("itemImageData").value = item.image || "";
+  if(item.image){
+    document.getElementById("itemImagePreview").src = item.image;
+    document.getElementById("itemImagePreviewWrap").style.display = "block";
+  }else{
+    document.getElementById("itemImagePreviewWrap").style.display = "none";
+  }
+  document.getElementById("itemModal").style.display = "flex";
+}
+
+function closeItemModal(){
+  document.getElementById("itemModal").style.display = "none";
+}
+
+function loadItemImage(event){
+  const file = event.target.files && event.target.files[0];
+  if(!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function(e){
+    const img = new Image();
+    img.onload = function(){
+      const max = 640;
+      const scale = Math.min(1, max/Math.max(img.width,img.height));
+      const canvas = document.createElement("canvas");
+      canvas.width = Math.max(1, Math.round(img.width*scale));
+      canvas.height = Math.max(1, Math.round(img.height*scale));
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img,0,0,canvas.width,canvas.height);
+
+      const dataUrl = canvas.toDataURL("image/jpeg",.72);
+      document.getElementById("itemImageData").value = dataUrl;
+      document.getElementById("itemImagePreview").src = dataUrl;
+      document.getElementById("itemImagePreviewWrap").style.display = "block";
+      event.target.value = "";
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
+}
+
+function saveItem(){
+  const id = document.getElementById("editItemId").value;
+  const name = document.getElementById("itemName").value.trim();
+  const category = document.getElementById("itemCategory").value.trim();
+  const type = document.getElementById("itemType").value;
+  const code = document.getElementById("itemCode").value;
+  const image = document.getElementById("itemImageData").value;
+
+  if(!name || !category){
+    showToast("Completa el nombre y la categoría.");
+    return;
+  }
+
+  if(id){
+    const index = catalogData.findIndex(i => i.id == id);
+
+    if(index !== -1){
+      catalogData[index] = {
+        id:Number(id),
+        name,
+        category,
+        type,
+        code,
+        image
+      };
+    }
+  }else{
+    catalogData.push({
+      id:Date.now(),
+      name,
+      category,
+      type,
+      code,
+      image
+    });
+  }
+
+  closeItemModal();
+  loadSavedTheme();
+loadSavedProfileImage();
+setTimeout(()=>loadSavedProfileImage(),500);
+renderCatalog();
+  showToast("¡Código guardado correctamente!");
+}
+
+function deleteItem(id){
+  if(confirm("¿Deseas eliminar este activo?")){
+    catalogData = catalogData.filter(i => i.id !== id);
+    renderCatalog();
+    showToast("Activo eliminado.");
+  }
+}
+
+function filterItems(){const q=document.getElementById("searchInput").value.toLowerCase().trim();applyFilters(q);}
+function syncHomeSearch(){const v=document.getElementById("homeSearchInput").value;document.getElementById("searchInput").value=v;applyFilters(v.toLowerCase().trim());}
+function selectCategory(c,b){selectedCategory=c;document.querySelectorAll(".category-btn").forEach(x=>x.classList.remove("active"));b.classList.add("active");applyFilters(document.getElementById("searchInput").value.toLowerCase().trim());}
+function applyFilters(q){document.querySelectorAll(".card-item").forEach(card=>{const t=card.querySelector(".card-title").innerText.toLowerCase(),c=card.querySelector(".card-category").innerText.toLowerCase(),badge=card.querySelector(".badge").innerText.toLowerCase();const tm=!q||t.includes(q)||c.includes(q)||badge.includes(q);let cm=true;if(selectedCategory==="FREE"||selectedCategory==="PREMIUM")cm=badge===selectedCategory.toLowerCase();else if(selectedCategory!=="TODOS")cm=c.includes(selectedCategory.toLowerCase());card.style.display=tm&&cm?"flex":"none";});}
+
+function viewCode(id){
+  const item = catalogData.find(i => i.id === id);
+  if(!item) return;
+
+  if(item.type === "PREMIUM" && !window.isAdmin){
+    const msg = encodeURIComponent(`Hola, quiero comprar el código "${item.name}" de Carlos Codex.`);
+    window.open(`https://wa.me/573016486100?text=${msg}`, "_blank");
+    return;
+  }
+
+  currentCodeId = id;
+  document.getElementById("codeModalTitle").innerText = item.name;
+  document.getElementById("codeText").textContent = item.code || "Este activo todavía no tiene código guardado.";
+  document.getElementById("codeModal").style.display = "flex";
+}
+
+function closeCodeModal(){
+  document.getElementById("codeModal").style.display = "none";
+  currentCodeId = null;
+}
+
+function copyCurrentCode(){
+  const item = catalogData.find(i => i.id === currentCodeId);
+  if(!item) return;
+
+  copyText(item.code || "").then(() => showToast("Código copiado."));
+}
+
+function copyAccountNumber(){
+  copyText("3016486100").then(() => showToast("Número 3016486100 copiado."));
+}
+
+async function copyText(text){
+  try{
+    if(navigator.clipboard && window.isSecureContext){
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const area = document.createElement("textarea");
+    area.value = text;
+    area.style.position = "fixed";
+    area.style.opacity = "0";
+    document.body.appendChild(area);
+    area.select();
+    document.execCommand("copy");
+    area.remove();
+  }catch(error){
+    showToast("No se pudo copiar automáticamente.");
+  }
+}
+
+function showToast(message){
+  const toast = document.getElementById("toast");
+  toast.innerText = message;
+  toast.classList.add("show");
+
+  setTimeout(() => {
+    toast.classList.remove("show");
+  }, 2200);
+}
+
+
+document.addEventListener("click",function(event){
+  const menu=document.getElementById("photoMenuV3");
+  const wrap=event.target.closest(".drawer-avatar-wrap-v3");
+  if(menu && !wrap) menu.classList.remove("open");
+});
+
+window.addEventListener("click", function(event){
+  if(event.target === document.getElementById("donateModal")){
+    closeDonateModal();
+  }
+
+  if(event.target === document.getElementById("itemModal")){
+    closeItemModal();
+  }
+
+  if(event.target === document.getElementById("codeModal")){
+    closeCodeModal();
+  }
+});
+
+renderCatalog();
+</script>
+
+</body>
+</html>
